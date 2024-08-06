@@ -1,0 +1,655 @@
+/* 
+font-family: 'Pirata One', cursive;
+font-family: 'Rammetto One', cursive;
+font-family: 'Varela Round', sans-serif;
+
+*/
+
+body {
+  margin: 0;
+  font: normal 75% Arial, Helvetica, sans-serif;
+  position: relative;
+}
+
+:root {
+  --main-color: rgb(104, 222, 110);
+  --main-color-50: rgba(104, 222, 110, 0.6);
+  --bold-title: "Lato", cursive;
+  --main-title: "Pirata One", cursive;
+  --main-text: "Poppins", sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--main-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #000;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #000;
+}
+
+/* Color overlay on the body background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(26, 26, 26); /* Adjust the color and transparency */
+  z-index: -1;
+}
+
+#particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+/* Adjust the particles container background */
+#particles-js {
+  position: relative; /* Change to relative positioning */
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+#particles-js::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.55); /* Adjust the color and transparency */
+  z-index: 1; /* Place it above the particles */
+}
+
+canvas {
+  display: block;
+}
+
+.bg-main {
+  backdrop-filter: blur(20px);
+}
+
+.main-nav {
+  padding: 10px;
+  transition: 0.5 ease-in-out;
+}
+
+.scrolled {
+  backdrop-filter: blur(10px);
+  background-color: transparent;
+  padding: 10px;
+  transition: 0.5 ease-in-out;
+}
+
+.text-main {
+  color: var(--main-color) !important;
+}
+
+.text-main2 {
+  color: var(--main-color) !important;
+}
+
+.text-main-50 {
+  color: var(--main-color-50) !important;
+}
+
+.btn-main {
+  background-color: var(--main-color) !important;
+  color: black;
+  border-radius: 25px !important;
+  font-weight: bold;
+  transition: 0.5s ease;
+}
+
+.btn-main:hover {
+  border: 1px solid var(--main-color) !important;
+  background-color: transparent !important;
+  color: var(--main-color) !important;
+  transition: 0.5s ease;
+}
+
+.btn-outline-main {
+  background-color: transparent;
+  color: var(--main-color) !important;
+  border-radius: 25px !important;
+  font-weight: bold;
+  border: 1px solid var(--main-color) !important;
+  transition: 0.5s ease;
+}
+
+.btn-outline-main:hover {
+  background-color: var(--main-color) !important;
+  color: black !important;
+  border-radius: 25px !important;
+  font-weight: bold;
+  border: 1px solid black !important;
+  transition: 0.5s ease;
+}
+
+.bold-text {
+  font-family: var(--bold-title) !important;
+}
+
+.main-title {
+  font-family: var(--main-title) !important;
+}
+
+.main-text {
+  font-family: var(--main-text) !important;
+}
+
+.fs-5 {
+  font-size: 3.5em !important;
+}
+
+.fs-4 {
+  font-size: 2.5em !important;
+}
+
+.fs-3 {
+  font-size: 2em !important;
+}
+
+.fs-2 {
+  font-size: 1.5em !important;
+}
+
+.fs-1 {
+  font-size: 1.2em !important;
+}
+
+.white-opacity-50 {
+  color: rgba(255, 255, 255, 0.595) !important;
+}
+
+#home {
+  height: 700px;
+  /* vertically center */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* media query for #home where text will be in center horizontally and  */
+@media (max-width: 768px) {
+  #home {
+    height: 700px;
+    /* horizontally center */
+    text-align: center;
+  }
+
+  .hide-on-mobile {
+    display: none;
+  }
+
+  .footer-links {
+    display: flex;
+
+    flex-direction: column;
+  }
+
+  .footer-links li {
+    padding: 10px;
+  }
+}
+@media (max-width: 458px) {
+  #home {
+    height: 600px;
+    /* horizontally center */
+    text-align: center;
+  }
+  .hide-on-mobile {
+    display: none;
+  }
+}
+
+.light-border {
+  border: 1px solid var(--main-color-50) !important;
+}
+
+.card {
+  border: var(--main-color);
+  background-color: transparent;
+  backdrop-filter: blur(5px) !important;
+}
+
+.exp {
+  border-color: var(--main-color) !important;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Align to the right */
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
+
+.social-links li {
+  margin: 1rem 0;
+  position: relative;
+}
+
+.social-links li a {
+  color: rgb(104, 222, 110);
+  font-size: 1.5rem;
+  transition: all 0.3s ease-in-out;
+  display: inline-block;
+  padding: 10px;
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+}
+
+.social-links::before,
+.social-links::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  background-color: rgb(104, 222, 110);
+}
+
+.social-links::before {
+  right: 20px; /* Adjust to position the line to the right of the icons */
+  bottom: 1rem;
+  top: 0;
+  height: 100%; /* Extend to the top */
+  z-index: -1; /* Push the lines behind the icons */
+}
+
+.social-links::after {
+  right: 20px; /* Adjust to position the line to the right of the icons */
+  top: 1rem;
+  bottom: 0;
+  height: 100%; /* Extend to the bottom */
+  z-index: -1; /* Push the lines behind the icons */
+}
+
+/* onhover active color white */
+.social-links li a:hover {
+  color: white !important;
+  transition: 0.2s;
+}
+
+/* Default styles for desktop */
+.about-img {
+  position: relative;
+  display: inline-block;
+  perspective: 1000px; /* Adjust the perspective value for the depth effect */
+  transition: 0.5s;
+}
+
+.about-img::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 3px solid rgb(104, 222, 110); /* Border color */
+  bottom: -20px;
+  right: -20px;
+  z-index: -1;
+  transition: 0.5s;
+  backdrop-filter: blur(5px);
+}
+
+.about-img::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    104,
+    222,
+    110,
+    0.227
+  ); /* Adjust the color and opacity */
+  top: 0;
+  left: 0;
+  z-index: 0; /* Place below the image and border */
+  transition: 0.5s;
+}
+
+.w-100 {
+  width: 100%;
+  height: 400px;
+}
+
+/* onhover remove the color overlay and adjust border position */
+.about-img:hover::after {
+  background-color: transparent;
+  transition: 0.5s;
+}
+
+.about-img:hover::before {
+  bottom: -35px;
+  right: -35px;
+  transition: 0.5s;
+  backdrop-filter: blur(5px);
+}
+
+.about-img:hover {
+  transform: translate(-10px, -10px);
+  transition: 0.5s;
+}
+
+.mobile-view-card {
+  height: 100px;
+  overflow: auto;
+}
+
+/* Media query for mobile view */
+@media (max-width: 768px) {
+  .git {
+    margin-left: 2.2rem;
+    margin-top: 0.7rem;
+  }
+
+  .git1 {
+    margin-left: 3rem;
+    margin-top: 0.7rem;
+  }
+
+  .about-img,
+  .about-img::before,
+  .about-img::after {
+    border: none; /* Remove the border */
+    transform: none; /* Remove the translation */
+    transition: none;
+  }
+
+  .about-img::before {
+    content: none; /* Remove the pseudo-element that creates the border */
+  }
+
+  .w-100 {
+    width: 100%;
+    height: 100%;
+  }
+
+  .about-img:hover::after,
+  .about-img:hover::before {
+    content: none; /* Remove the pseudo-elements on hover */
+  }
+
+  .about-img:hover {
+    transform: none; /* Remove the hover transformation */
+  }
+
+  figure {
+    /* center */
+    display: flex;
+    /* colums */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide .card-title {
+    margin-top: 20px;
+  }
+
+  .mobile-view-card {
+    height: 300px;
+    overflow: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .border-main .badge {
+    border: 1px solid rgba(255, 255, 255, 0.101) !important;
+    transition: 0.4s;
+  }
+
+  .border-main .badge:hover {
+    background-color: transparent !important;
+    border: 1px solid var(--main-color-50) !important;
+    color: var(--main-color-50) !important;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+
+  .badge-main-class {
+    background-color: var(--main-color-50) !important;
+    color: black !important;
+    font-size: 1em !important;
+    font-family: var(--main-text) !important;
+    border-radius: 0px !important;
+    transition: 0.5s;
+    margin-bottom: 10px;
+  }
+}
+
+.nav-tabs {
+  border-bottom: none !important;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.665);
+  font-size: 1.3em !important;
+  font-family: var(--main-text) !important;
+  border: none;
+  border-radius: 0px !important;
+  transition: 0.5s;
+}
+.tabs {
+  color: rgba(255, 255, 255, 0.665);
+  font-size: 1.2em !important;
+  font-family: var(--main-text) !important;
+  border: none;
+  border-radius: 0px !important;
+  transition: 0.5s;
+}
+
+.tabs .active {
+  color: var(--main-color) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: none;
+}
+
+.tabs .nav-link:hover {
+  color: var(--main-color) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: none;
+}
+
+.list-group-item {
+  background-color: rgba(0, 0, 0, 0.315) !important;
+  border: 1px solid rgba(255, 255, 255, 0.101);
+}
+
+.border-main {
+  transition: 0.2s;
+}
+
+.border-main:hover {
+  border: 1px solid var(--main-color-50) !important;
+  transition: 0.2s;
+}
+
+.border-main .badge {
+  border: 1px solid rgba(255, 255, 255, 0.101) !important;
+  transition: 0.4s;
+}
+
+.border-main .badge:hover {
+  background-color: transparent !important;
+  border: 1px solid var(--main-color-50) !important;
+  color: var(--main-color-50) !important;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.badge-main-class {
+  background-color: var(--main-color-50) !important;
+  color: black !important;
+  font-size: 1em !important;
+  font-family: var(--main-text) !important;
+  border-radius: 0px !important;
+  transition: 0.5s;
+}
+
+/* Add a line at the bottom of the link */
+.navbar-nav .nav-item .nav-link {
+  position: relative;
+  padding-bottom: 5px; /* Adjust the thickness of the line */
+  transition: padding-bottom 0.3s; /* Add a smooth transition effect */
+}
+
+/* Add a line at the bottom of the link */
+.navbar-nav .nav-item .nav-link:hover {
+  color: var(--main-color);
+}
+
+/* Styling the line on hover */
+.navbar-nav .nav-item .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 7px;
+  width: 80%;
+  height: 1px; /* Thickness of the line */
+  background-color: var(--main-color);
+  transform: scaleX(0); /* Initially, the line is not visible */
+  transform-origin: bottom left;
+  transition: transform 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link:hover::after {
+  transform: scaleX(1); /* Expand the line on hover */
+}
+
+/* Add a line at the bottom of the link */
+.footer-links li a {
+  font-size: 1.5em !important;
+  position: relative;
+  padding-bottom: 5px; /* Adjust the thickness of the line */
+  transition: padding-bottom 0.3s, color 0.3s; /* Add a smooth transition effect for both padding and color */
+  color: rgba(255, 255, 255, 0.492) !important; /* Default link color */
+}
+/* Add a line at the bottom of the link */
+.footer-links li:hover a {
+  color: var(--main-color) !important; /* Change link color on hover */
+}
+
+/* Styling the line on hover */
+.footer-links li a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px; /* Thickness of the line */
+  background-color: var(--main-color);
+  transform: scaleX(0); /* Initially, the line is not visible */
+  transform-origin: bottom left;
+  transition: transform 0.3s;
+}
+
+.footer-links li a:hover {
+  color: var(--main-color); /* Change link color on hover */
+}
+
+.footer-links li a:hover::after {
+  transform: scaleX(1); /* Expand the line on hover */
+}
+
+#webSkillsChart text[data-index] {
+  fill: red;
+}
+
+.designed {
+  position: relative;
+  text-decoration: none;
+  color: var(--main-color); /* Text color */
+}
+
+.designed::before,
+.designed::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px; /* Adjust the thickness of the line as needed */
+  background-color: var(--main-color); /* Line color */
+  bottom: -5px; /* Adjust the distance from text as needed */
+  transition: width 0.3s;
+}
+
+.designed::before {
+  left: 0;
+}
+
+.designed::after {
+  right: 0;
+}
+
+.designed:hover::before {
+  width: 100%;
+}
+
+.nav-hedings {
+  font-family: "Poppins";
+  font-weight: 400;
+}
+
+/* Default style for larger screens (desktop and larger) */
+#chartText {
+  display: none; /* Hide the text by default */
+}
+
+#chartText2 {
+  display: block; /* Hide the text by default */
+}
+
+.swiper-slide {
+  flex: 1 0 calc(50% - 20px); /* Two cards per row with horizontal margin */
+  margin: 10px;
+  
+}
+/* Media query for screens smaller than 768px (mobile) */
+@media (max-width: 767px) {
+  #chartText {
+    display: block; /* Show the text on smaller screens */
+  }
+
+  #chartText2 {
+    display: none; /* Hide the text by default */
+  }
+
+  .swiper-slide {
+    flex: 1 0 calc(100%); /* One card per row on smaller screens */
+    margin: 15px 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .swiper-slide {
+    flex: 1 0 calc(100%); /* One card per row on smaller screens */
+    margin: 10px 0;
+  }
+}
+/* Add margin to the top when the "moved-down" class is present */
