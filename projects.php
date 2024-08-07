@@ -10,8 +10,7 @@ $projects_result = $db->query("SELECT * FROM projects ORDER BY id DESC");
     .tech-badges-container {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px; /* Adds margin between badges */
-        /* Ensure no border or outline is set on the container */
+        gap: 10px;
         border: none;
         outline: none;
     }
@@ -22,9 +21,18 @@ $projects_result = $db->query("SELECT * FROM projects ORDER BY id DESC");
         border-radius: 12px;
         background-color: transparent;
         color: white;
-        border: 1px solid white; /* Optional: Adds a border to the badge itself */
-        font-size: 0.875rem; /* Adjust as needed */
+        border: 1px solid white;
+        font-size: 0.875rem;
         text-align: center;
+    }
+
+    .project-card {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
     }
     </style>
 
@@ -49,7 +57,7 @@ $projects_result = $db->query("SELECT * FROM projects ORDER BY id DESC");
                         <div class="swiper-wrapper">
                             <?php while ($project = $projects_result->fetch_assoc()): ?>
                                 <div class="swiper-slide">
-                                    <div class="card mb-3 border border-main p-3 rounded-4 main-text" data-aos="fade-up">
+                                    <div class="card mb-3 border border-main p-3 rounded-4 main-text project-card" data-aos="fade-up" onclick="window.location.href='project-details.php?id=<?php echo $project['id']; ?>'">
                                         <div class="row g-0">
                                             <div class="col-md-4 d-flex justify-content-center align-items-center" style="height: 170px;">
                                                 <div style="height: 180px; width: 180px; object-fit: cover;">
@@ -67,16 +75,19 @@ $projects_result = $db->query("SELECT * FROM projects ORDER BY id DESC");
                                                     <div class="mt-3 d-flex flex-wrap align-items-center justify-content-between">
                                                         <div class="tech-badges-container">
                                                             <?php 
-                                                            // Display technologies as badges
-                                                            $technologies = explode(", ", $project['project_technologies']);
-                                                            foreach ($technologies as $tech): ?>
+                                                            $technologies = explode("\n", $project['project_technologies']); // Split technologies by newline
+                                                            foreach ($technologies as $tech): 
+                                                                $tech = trim($tech);
+                                                                if (!empty($tech)):
+                                                            ?>
                                                                 <span class="badge"><?php echo htmlspecialchars($tech); ?></span>
-                                                            <?php endforeach; ?>
+                                                            <?php
+                                                                endif;
+                                                            endforeach; ?>
                                                         </div>
                                                         <div class="git">
-                                                            <a href="<?php echo htmlspecialchars($project['project_link']); ?>" style="text-decoration: none;">
+                                                            <a href="<?php echo htmlspecialchars($project['project_link']); ?>" style="text-decoration: none;" onclick="event.stopPropagation();">
                                                                 <button class="btn btn-main btn-sm main-text px-3 mt-2">
-                                                                    <!-- Use mt-2 for spacing -->
                                                                     Github
                                                                 </button>
                                                             </a>

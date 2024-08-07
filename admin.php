@@ -186,6 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['project_submit'])) {
     <title>Admin Panel</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             background-color: #343a40; /* Dark background */
@@ -197,6 +198,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['project_submit'])) {
     </style>
 </head>
 <body>
+<div id="particles-container">
+        <div id="particles-js"></div>
+    </div>
     <div class="container">
         <section id="hero" class="mt-5">
             <h2>Hero Section</h2>
@@ -234,10 +238,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['project_submit'])) {
                     <div class="mb-3">
                         <label for="service_type" class="form-label">Service Type</label>
                         <select name="service_type" id="service_type" class="form-control" required>
-                            <option value="framework">Framework</option>
-                            <option value="frontend">Frontend</option>
-                            <option value="backend">Backend</option>
-                            <option value="uiux">UI/UX</option>
+                            <option value="Framework">Framework</option>
+                            <option value="Frontend">Frontend</option>
+                            <option value="Backend">Backend</option>
+                            <option value="Ui/Ux">UI/UX</option>
+                            <option value="Database">Database</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -277,7 +282,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['project_submit'])) {
         </div>
         <div class="form-group">
             <label for="project_technologies" class="form-label">Project Technologies (separate each with a comma):</label>
-            <input type="text" name="project_technologies[]" id="project_technologies" class="form-control" required>
+            <textarea type="text" name="project_technologies[]" id="project_technologies" class="form-control" required></textarea>
         </div>
         <button type="submit" name="project_submit" class="btn btn-dark">Add Project</button>
     </form>
@@ -293,4 +298,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['project_submit'])) {
 </script>
     </div>
 </body>
+<?php include_once('particles.php'); ?>
 </html>

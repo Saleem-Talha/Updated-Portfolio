@@ -5,7 +5,7 @@ include('includes/header-links.php');
 // Fetch the latest description and image from the about table
 $about_description = '';
 $about_img = '';
-$result = $db->query("SELECT description, about_img FROM about ORDER BY id DESC LIMIT 1");
+$result = $db->query("SELECT description, about_img FROM about ORDER BY id  LIMIT 1");
 if ($result && $result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $about_description = $row['description'];
@@ -40,7 +40,7 @@ if ($result && $result->num_rows > 0) {
                                 Experience : <span style=" color: rgb(104, 222, 110);">3 years +</span>
                             </li>
                             <li>
-                                Projects : <span style="color:  rgb(104, 222, 110);">30 +</span>
+                                Projects : <span style="color:  rgb(104, 222, 110);">45 +</span>
                             </li>
                         </ul>
 

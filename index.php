@@ -35,10 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 
@@ -46,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Saleem Talha Portfolio</title>
-
 </head>
 
 <body class="text-white">
@@ -193,3 +188,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </body>
 </html>
+
+<script>
+        document.addEventListener('keydown', function(event) {
+            if (event.altKey && event.shiftKey && event.key === 'A') {
+                // Redirect to admin.php
+                window.location.href = 'admin.php';
+            }
+        });
+    </script>

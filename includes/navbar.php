@@ -1,3 +1,4 @@
+
 <nav id="navbar" class="navbar navbar-expand-lg navbar-dark main-nav">
         <div class="container">
             <a class="navbar-brand bold-text" href="#" data-aos="fade-down" data-aos-delay="100">Saleem Talha</a>
