@@ -23,9 +23,7 @@
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="600">
                         <a class="nav-link" href="#projects">Projects</a>
                     </li>
-                    <li class="nav-item" data-aos="fade-down" data-aos-delay="700">
-                        <a class="nav-link" href="#contacts">Contact</a>
-                    </li>
+                   
                 </ul>
             </div>
         </div>

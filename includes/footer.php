@@ -7,10 +7,10 @@
                     <!-- social links -->
                     <ul class="footer-social-links" data-aos="fade-up">
                         <li>
-                            <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.instagram.com/______talha_/" target="_blank"><i class="fab fa-instagram"></i></a>
                         </li>
                         <li>
-                            <a href="https://www.linkedin.com/in/saleem-talha-47b004281/" target="_blank"><i
+                            <a href="https://www.linkedin.com/in/muhammad-saleem-talha?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app " target="_blank"><i
                                     class="fab fa-linkedin-in"></i></a>
                         </li>
                         <li>
@@ -57,7 +57,7 @@
                         <li><a class="nav-hedings" href="#skills">Skills</a></li>
                         <li><a class="nav-hedings" href="#services">Services</a></li>
                         <li><a class="nav-hedings" href="#projects">Projects</a></li>
-                        <li><a class="nav-hedings" href="#contacts">Contact</a></li>
+                        
                     </ul>
 
                     <style>

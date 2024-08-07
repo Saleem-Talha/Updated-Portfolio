@@ -87,64 +87,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<div class='alert alert-danger' role='alert'>Sorry, there was an error uploading your file.</div>";
             }
         }
-    }
-}
+    } elseif (isset($_POST['add_service'])) {
+        $service_type = $_POST['service_type'];
+        $service_heading = $_POST['service_heading'];
+        $services = implode(", ", $_POST['services']); // Convert array to comma-separated string
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_service'])) {
-    $service_type = $_POST['service_type'];
-    $service_heading = $_POST['service_heading'];
-    $services = implode(", ", $_POST['services']); // Convert array to comma-separated string
-
-    $stmt = $db->prepare("INSERT INTO services (service_type, service_heading, services) VALUES (?, ?, ?)");
-    if ($stmt) {
-        $stmt->bind_param("sss", $service_type, $service_heading, $services);
-        if ($stmt->execute()) {
-            echo "<div class='alert alert-success' role='alert'>Service added successfully!</div>";
+        $stmt = $db->prepare("INSERT INTO services (service_type, service_heading, services) VALUES (?, ?, ?)");
+        if ($stmt) {
+            $stmt->bind_param("sss", $service_type, $service_heading, $services);
+            if ($stmt->execute()) {
+                echo "<div class='alert alert-success' role='alert'>Service added successfully!</div>";
+            } else {
+                echo "<div class='alert alert-danger' role='alert'>Error adding service: " . $stmt->error . "</div>";
+            }
+            $stmt->close();
         } else {
-            echo "<div class='alert alert-danger' role='alert'>Error adding service: " . $stmt->error . "</div>";
+            echo "<div class='alert alert-danger' role='alert'>Error preparing statement: " . $db->error . "</div>";
         }
+    } elseif (isset($_POST['project_submit'])) {
+        $project_name = $_POST['project_name'];
+        $project_description = $_POST['project_description'];
+        $project_features = $_POST['project_features'];
+        $project_link = $_POST['project_link'];
+        $project_demo_link = $_POST['project_demo_link']; // demo_link is now correctly named
+        $project_technologies = $_POST['project_technologies'];
+
+        // Handle file upload
+        $target_dir = "project_img/";
+        $target_file = $target_dir . basename($_FILES["project_img"]["name"]);
+        move_uploaded_file($_FILES["project_img"]["tmp_name"], $target_file);
+
+        // Process technologies
+        $technologies_array = array_map('trim', explode(',', $project_technologies));
+        $technologies_string = implode(', ', $technologies_array);
+
+        // Insert into database
+        $stmt = $db->prepare("INSERT INTO projects (project_name, project_description, project_features, project_link, demo_link, project_img, project_technologies) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssss", $project_name, $project_description, $project_features, $project_link, $project_demo_link, $target_file, $technologies_string);
+        
+        if ($stmt->execute()) {
+            echo "<div class='alert alert-success' role='alert'>Project added successfully!</div>";
+        } else {
+            echo "<div class='alert alert-danger' role='alert'>Error adding project: " . $stmt->error . "</div>";
+        }
+        
         $stmt->close();
-    } else {
-        echo "<div class='alert alert-danger' role='alert'>Error preparing statement: " . $db->error . "</div>";
     }
 }
 
 // Fetch services from the database
 $services_result = $db->query("SELECT * FROM services ORDER BY id DESC");
-
-
-// Handle Project section submission
-if (isset($_POST['project_submit'])) {
-    $project_name = $_POST['project_name'];
-    $project_description = $_POST['project_description'];
-    $project_features = $_POST['project_features'];
-    $project_link = $_POST['project_link'];
-    $project_technologies = $_POST['project_technologies'];
-
-    // Handle file upload
-    $target_dir = "project_img/";
-    $target_file = $target_dir . basename($_FILES["project_img"]["name"]);
-    move_uploaded_file($_FILES["project_img"]["tmp_name"], $target_file);
-
-    // Process technologies
-    $technologies_array = array_map('trim', explode(',', $project_technologies));
-    $technologies_string = implode(', ', $technologies_array);
-
-    // Insert into database
-    $stmt = $db->prepare("INSERT INTO projects (project_name, project_description, project_features, project_link, project_img, project_technologies) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $project_name, $project_description, $project_features, $project_link, $target_file, $technologies_string);
-    
-    if ($stmt->execute()) {
-        echo "Project added successfully";
-    } else {
-        echo "Error: " . $stmt->error;
-    }
-    
-    $stmt->close();
-}
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -167,99 +160,105 @@ if (isset($_POST['project_submit'])) {
 </head>
 <body>
 <div id="particles-container">
-        <div id="particles-js"></div>
-    </div>
-    <div class="container">
-        <section id="hero" class="mt-5">
-            <h2>Hero Section</h2>
-            <form method="post" action="">
-                <div class="form-group">
-                    <label for="description" class="form-label">Hero Description:</label>
-                    <textarea name="description" id="description" rows="5" class="form-control" required></textarea>
-                </div>
-                <button type="submit" name="hero_submit" class="btn btn-dark">Save Hero</button>
-            </form>
-        </section>
+    <div id="particles-js"></div>
+</div>
+<div class="container">
+    <!-- Hero Section Form -->
+    <section id="hero" class="mt-5">
+        <h2>Hero Section</h2>
+        <form method="post" action="">
+            <div class="form-group">
+                <label for="description" class="form-label">Hero Description:</label>
+                <textarea name="description" id="description" rows="5" class="form-control" required></textarea>
+            </div>
+            <button type="submit" name="hero_submit" class="btn btn-dark">Save Hero</button>
+        </form>
+    </section>
 
-        <section id="about" class="mt-5">
-            <h2>About Section</h2>
-            <form method="post" action="" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="about_description" class="form-label">About Description:</label>
-                    <textarea name="about_description" id="about_description" rows="5" class="form-control" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="about_img" class="form-label">About Image:</label>
-                    <input type="file" name="about_img" id="about_img" class="form-control-file" required>
-                </div>
-                <button type="submit" name="about_submit" class="btn btn-dark">Save About</button>
-            </form>
-        </section>
+    <!-- About Section Form -->
+    <section id="about" class="mt-5">
+        <h2>About Section</h2>
+        <form method="post" action="" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="about_description" class="form-label">About Description:</label>
+                <textarea name="about_description" id="about_description" rows="5" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="about_img" class="form-label">About Image:</label>
+                <input type="file" name="about_img" id="about_img" class="form-control-file" required>
+            </div>
+            <button type="submit" name="about_submit" class="btn btn-dark">Save About</button>
+        </form>
+    </section>
 
-        <section class="services py-5" id="services">
+    <!-- Services Section Form -->
+    <section class="services py-5" id="services">
         <div class="container">
-        <!-- Add Service Form -->
-        <div class="row mt-5">
-            <div class="col-md-12">
-                <h3>Add New Service</h3>
-                <form method="post" action="">
-                    <div class="mb-3">
-                        <label for="service_type" class="form-label">Service Type</label>
-                        <select name="service_type" id="service_type" class="form-control" required>
-                            <option value="Framework">Framework</option>
-                            <option value="Frontend">Frontend</option>
-                            <option value="Backend">Backend</option>
-                            <option value="Ui/Ux">UI/UX</option>
-                            <option value="Database">Database</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="service_heading" class="form-label">Service Heading</label>
-                        <input type="text" name="service_heading" id="service_heading" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="services" class="form-label">Services (one per line)</label>
-                        <textarea name="services[]" id="services" class="form-control" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" name="add_service" class="btn btn-primary">Add Service</button>
-                </form>
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <h3>Add New Service</h3>
+                    <form method="post" action="">
+                        <div class="mb-3">
+                            <label for="service_type" class="form-label">Service Type</label>
+                            <select name="service_type" id="service_type" class="form-control" required>
+                                <option value="Framework">Framework</option>
+                                <option value="Frontend">Frontend</option>
+                                <option value="Backend">Backend</option>
+                                <option value="Ui/Ux">UI/UX</option>
+                                <option value="Database">Database</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="service_heading" class="form-label">Service Heading</label>
+                            <input type="text" name="service_heading" id="service_heading" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="services" class="form-label">Services (one per line)</label>
+                            <textarea name="services[]" id="services" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" name="add_service" class="btn btn-primary">Add Service</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Project Section Form -->
-<section id="projects" class="mt-5">
-    <h2>Projects Section</h2>
-    <form method="post" action="" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="project_name" class="form-label">Project Name:</label>
-            <input type="text" name="project_name" id="project_name" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="project_description" class="form-label">Project Description:</label>
-            <textarea name="project_description" id="project_description" rows="5" class="form-control" required></textarea>
-        </div>
-        <div class="form-group">
-            <label for="project_features" class="form-label">Project Features (one per line):</label>
-            <textarea name="project_features" id="project_features" rows="5" class="form-control" placeholder="Enter each feature on a new line"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="project_link" class="form-label">Project Link:</label>
-            <input type="url" name="project_link" id="project_link" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="project_img" class="form-label">Project Image:</label>
-            <input type="file" name="project_img" id="project_img" class="form-control-file" required>
-        </div>
-        <div class="form-group">
-            <label for="project_technologies" class="form-label">Project Technologies (separate each with a comma):</label>
-            <textarea name="project_technologies" id="project_technologies" class="form-control" required></textarea>
-        </div>
-        <button type="submit" name="project_submit" class="btn btn-dark">Add Project</button>
-    </form>
-</section>
-    </body>
+    <!-- Project Section Form -->
+    <section id="projects" class="mt-5">
+        <h2>Projects Section</h2>
+        <form method="post" action="" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="project_name" class="form-label">Project Name:</label>
+                <input type="text" name="project_name" id="project_name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="project_description" class="form-label">Project Description:</label>
+                <textarea name="project_description" id="project_description" rows="5" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="project_features" class="form-label">Project Features (one per line):</label>
+                <textarea name="project_features" id="project_features" rows="5" class="form-control" placeholder="Enter each feature on a new line"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="project_link" class="form-label">Project Link:</label>
+                <input type="url" name="project_link" id="project_link" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="project_demo_link" class="form-label">Project Demo Link:</label>
+                <input type="url" name="project_demo_link" id="project_demo_link" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="project_img" class="form-label">Project Image:</label>
+                <input type="file" name="project_img" id="project_img" class="form-control-file" required>
+            </div>
+            <div class="form-group">
+                <label for="project_technologies" class="form-label">Project Technologies (separate each with a comma):</label>
+                <textarea name="project_technologies" id="project_technologies" class="form-control" required></textarea>
+            </div>
+            <button type="submit" name="project_submit" class="btn btn-dark">Add Project</button>
+        </form>
+    </section>
+</div>
 
 <script>
     // JavaScript to handle dynamic addition of service items
@@ -268,7 +267,7 @@ if (isset($_POST['project_submit'])) {
         e.target.value = lines.join('\n');
     });
 </script>
-    </div>
-</body>
+
 <?php include_once('particles.php'); ?>
+</body>
 </html>

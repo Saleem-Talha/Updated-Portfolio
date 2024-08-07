@@ -30,7 +30,7 @@
 
                 <div class="col-md-4" data-aos="fade-up">
                     <!-- Display ECharts Pie Chart -->
-                    <div id="customizedPieChart2" style="width: 100%; height: 400px"></div>
+                    <div id="customizedPieChart7" style="width: 100%; height: 400px"></div>
                 </div>
                 <div class="col-md-4" data-aos="fade-up">
                     <!-- Display ECharts Pie Chart -->
@@ -44,6 +44,14 @@
                     <div class="col-md-4" data-aos="fade-up">
                         <!-- Display ECharts Pie Chart -->
                         <div id="customizedPieChart5" style="width: 100%; height: 400px"></div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up">
+                        <!-- Display ECharts Pie Chart -->
+                        <div id="customizedPieChart6" style="width: 100%; height: 400px"></div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up">
+                        <!-- Display ECharts Pie Chart -->
+                        <div id="customizedPieChart2" style="width: 100%; height: 400px"></div>
                     </div>
                 </div>
 

@@ -58,7 +58,7 @@
         const webSkillsData = {
             ...pieChartOptions,
             title: {
-                text: "Frontend Development",
+                text: "React Development",
                 left: "center",
                 top: 20,
 
@@ -70,12 +70,12 @@
                 {
                     ...pieChartOptions.series[0],
                     data: [
-                        { value: 210, name: "JavaScript", tooltip: "<span style='font-weight: 600;'>JavaScript</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Intermediate</span>" },
-                        { value: 270, name: "Bootstrap", tooltip: "<span style='font-weight: 600;'>Bootstrap</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Experieced</span>" },
-                        { value: 370, name: "Website Development", tooltip: "<span style='font-weight: 600;'>Website Development</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Skilled</span>" },
-                        { value: 470, name: "Performance Optimization", tooltip: "<span style='font-weight: 600;'>Performance Optimization</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Proficient</span>" },
-                        { value: 500, name: "Responssive Layouts", tooltip: "<span style='font-weight: 600;'>Responssive Layouts</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Skilled</span>" },
-                        { value: 510, name: "HTML & CSS", tooltip: "<span style='font-weight: 600;'>HTML & CSS</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Expert</span>" },
+                        { value: 210, name: "JSX Syntax", tooltip: "<span style='font-weight: 600;'>JSX Syntax</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Good</span>" },
+                        { value: 270, name: "Redux Management", tooltip: "<span style='font-weight: 600;'>Redux Management</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Intermediate</span>" },
+                        { value: 370, name: "State & Props Management", tooltip: "<span style='font-weight: 600;'>State & Props Management</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Skilled</span>" },
+                        { value: 470, name: "Conditional Rendering", tooltip: "<span style='font-weight: 600;'>Conditional Rendering</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Proficient</span>" },
+                        { value: 500, name: "Static & Dynamic Routing", tooltip: "<span style='font-weight: 600;'>Static & Dynamic Routing</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Skilled</span>" },
+                        { value: 510, name: "React Components", tooltip: "<span style='font-weight: 600;'>React Components</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Expert</span>" },
                     ],
                     itemStyle: {
                         color: "#5470c6",
@@ -216,6 +216,66 @@
                 },
             ],
         };
+        const frontenddata = {
+            ...pieChartOptions,
+            title: {
+                text: "Frontend Development",
+                left: "center",
+                top: 20,
+                textStyle: {
+                    color: "rgba(255, 255, 255, 0.3)",
+                },
+            },
+            series: [
+                {
+                    ...pieChartOptions.series[0],
+                    data: [
+                        { value: 250, name: "Database Integration", tooltip: "<span style='font-weight: 600;'>Database Integration</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Good</span>" },
+                        { value: 350, name: "Backend Development", tooltip: "<span style='font-weight: 600;'>Backend Development</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Proficient</span>" },
+                        { value: 410, name: "Frontend Development", tooltip: "<span style='font-weight: 600;'>Frontend Development</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Experienced</span>" },
+                        { value: 450, name: "Full Stack Applications", tooltip: "<span style='font-weight: 600;'>Full Stack Applications</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Expert</span>" },
+                    ],
+                    itemStyle: {
+                        color: "rgb(255, 165, 0)", // RGB orange
+                    },
+                    tooltip: {
+                        formatter: function (params) {
+                            return params.data.tooltip;
+                        },
+                    },
+                },
+            ],
+        };
+        const phpdata = {
+            ...pieChartOptions,
+            title: {
+                text: "PHP Development",
+                left: "center",
+                top: 20,
+                textStyle: {
+                    color: "rgba(255, 255, 255, 0.3)",
+                },
+            },
+            series: [
+                {
+                    ...pieChartOptions.series[0],
+                    data: [
+                        { value: 250, name: "JavaScript", tooltip: "<span style='font-weight: 600;'>JavaScript</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Good</span>" },
+                        { value: 350, name: "HTML CSS", tooltip: "<span style='font-weight: 600;'>HTML CSS</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Proficient</span>" },
+                        { value: 410, name: "Tailwind CSS", tooltip: "<span style='font-weight: 600;'>Tailwind CSS</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Experienced</span>" },
+                        { value: 450, name: "Bootstrap", tooltip: "<span style='font-weight: 600;'>Bootstrap</span><br><span style='color: rgb(30, 143, 151);'>•</span> <span style='color: yourTextColor; font-weight: 600;'>Expert</span>" },
+                    ],
+                    itemStyle: {
+                        color: "rgb(192, 192, 192)", // RGB silver
+                    },
+                    tooltip: {
+                        formatter: function (params) {
+                            return params.data.tooltip;
+                        },
+                    },
+                },
+            ],
+        };
 
 
 
@@ -235,10 +295,18 @@
         const databasechart = echarts.init(
             document.getElementById("customizedPieChart5")
         );
+        const frontenndchart = echarts.init(
+            document.getElementById("customizedPieChart6")
+        );
+        const phpchart = echarts.init(
+            document.getElementById("customizedPieChart7")
+        );
 
         webSkillsChart.setOption(webSkillsData);
         uiuxSkillsChart.setOption(uiuxSkillsData);
         mobilechart.setOption(mobiledata);
         dotnetchart.setOption(dotnetdata);
         databasechart.setOption(databasedata);
+        frontenndchart.setOption(frontenddata);
+        phpchart.setOption(phpdata);
     </script>

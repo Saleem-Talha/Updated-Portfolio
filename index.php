@@ -41,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
     <title>Saleem Talha Portfolio</title>
 </head>
 
@@ -69,11 +70,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </p>
                                 <a href="https://drive.google.com/file/d/1j0zs4pDJBRp0-2Omqm4_w4HpL5DEuwGC/view?usp=sharing"
                                     target="_blank">
-                                    <button class="btn btn-main mt-3 main-text me-3">
+                                    <button class="btn btn-outline-main mt-3 main-text me-3">
                                         Download
                                         CV
                                     </button></a>
-                                <a href="#contacts" class="btn btn-outline-main mt-3 main-text">Contact Me</a>
                             </div>
                         </div>
                     </div>
@@ -82,12 +82,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="hide-on-mobile">
                         <ul class="social-links">
                             <li>
-                                <a href="https://www.instagram.com/" target="_blank">
+                                <a href="https://www.instagram.com/______talha_/" target="_blank">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.linkedin.com/in/saleem-talha-47b004281/" target="_blank">
+                                <a href="https://www.linkedin.com/in/muhammad-saleem-talha?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app " target="_blank">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
                             </li>
@@ -169,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include_once('skills.php'); ?>
     <?php include_once('services.php'); ?>
     <?php include_once('projects.php'); ?>
-    <?php include_once('contact.php'); ?>
+   
     <?php include_once('includes/footer.php'); ?>
     <?php include_once('particles.php'); ?>
     <?php include_once('echarts.php'); ?>
