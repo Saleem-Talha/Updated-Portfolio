@@ -12,7 +12,7 @@ body {
 }
 
 :root {
-  --main-color: rgb(104, 222, 110);
+  --main-color: rgb(96, 201, 101);
   --main-color-50: rgba(104, 222, 110, 0.6);
   --bold-title: "Lato", cursive;
   --main-title: "Pirata One", cursive;
@@ -116,8 +116,8 @@ canvas {
 .btn-main {
   background-color: var(--main-color) !important;
   color: black;
-  border-radius: 25px !important;
-  font-weight: bold;
+
+
   transition: 0.5s ease;
 }
 
@@ -125,25 +125,25 @@ canvas {
   border: 1px solid var(--main-color) !important;
   background-color: transparent !important;
   color: var(--main-color) !important;
-  transition: 0.5s ease;
+  transition: 0.2s ease;
 }
 
 .btn-outline-main {
   background-color: transparent;
   color: var(--main-color) !important;
-  border-radius: 25px !important;
-  font-weight: bold;
+  
+ 
   border: 1px solid var(--main-color) !important;
-  transition: 0.5s ease;
+  transition: 0.2s ease;
 }
 
 .btn-outline-main:hover {
   background-color: var(--main-color) !important;
   color: black !important;
-  border-radius: 25px !important;
-  font-weight: bold;
+  
+  
   border: 1px solid black !important;
-  transition: 0.5s ease;
+  transition: 0.2s ease;
 }
 
 .bold-text {

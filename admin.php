@@ -114,69 +114,37 @@ $services_result = $db->query("SELECT * FROM services ORDER BY id DESC");
 
 
 // Handle Project section submission
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['project_submit'])) {
+if (isset($_POST['project_submit'])) {
     $project_name = $_POST['project_name'];
     $project_description = $_POST['project_description'];
+    $project_features = $_POST['project_features'];
     $project_link = $_POST['project_link'];
-    $project_img = $_FILES['project_img'];
-    $project_technologies = implode(", ", $_POST['project_technologies']); // Convert array to comma-separated string
+    $project_technologies = $_POST['project_technologies'];
 
     // Handle file upload
     $target_dir = "project_img/";
-    
-    // Create the directory if it doesn't exist
-    if (!file_exists($target_dir)) {
-        mkdir($target_dir, 0777, true);
-    }
-    
-    $target_file = $target_dir . basename($project_img["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    $target_file = $target_dir . basename($_FILES["project_img"]["name"]);
+    move_uploaded_file($_FILES["project_img"]["tmp_name"], $target_file);
 
-    // Check if image file is a actual image or fake image
-    $check = getimagesize($project_img["tmp_name"]);
-    if($check !== false) {
-        $uploadOk = 1;
+    // Process technologies
+    $technologies_array = array_map('trim', explode(',', $project_technologies));
+    $technologies_string = implode(', ', $technologies_array);
+
+    // Insert into database
+    $stmt = $db->prepare("INSERT INTO projects (project_name, project_description, project_features, project_link, project_img, project_technologies) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $project_name, $project_description, $project_features, $project_link, $target_file, $technologies_string);
+    
+    if ($stmt->execute()) {
+        echo "Project added successfully";
     } else {
-        echo "<div class='alert alert-danger' role='alert'>File is not an image.</div>";
-        $uploadOk = 0;
+        echo "Error: " . $stmt->error;
     }
-
-    // Check file size
-    if ($project_img["size"] > 500000) {
-        echo "<div class='alert alert-danger' role='alert'>Sorry, your file is too large.</div>";
-        $uploadOk = 0;
-    }
-
-    // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    && $imageFileType != "gif" ) {
-        echo "<div class='alert alert-danger' role='alert'>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</div>";
-        $uploadOk = 0;
-    }
-
-    // If everything is ok, try to upload file and save data
-    if ($uploadOk == 1) {
-        if (move_uploaded_file($project_img["tmp_name"], $target_file)) {
-            // File uploaded successfully, now save to database
-            $stmt = $db->prepare("INSERT INTO projects (project_name, project_description, project_link, project_img, project_technologies) VALUES (?, ?, ?, ?, ?)");
-
-            if ($stmt) {
-                $stmt->bind_param("sssss", $project_name, $project_description, $project_link, $target_file, $project_technologies);
-                $stmt->execute();
-                $stmt->close();
-
-                echo "<div class='alert alert-success' role='alert'>Project added successfully!</div>";
-            } else {
-                echo "<div class='alert alert-danger' role='alert'>Error preparing statement: " . $db->error . "</div>";
-            }
-        } else {
-            echo "<div class='alert alert-danger' role='alert'>Sorry, there was an error uploading your file.</div>";
-        }
-    }
+    
+    $stmt->close();
 }
-
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -273,6 +241,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['project_submit'])) {
             <textarea name="project_description" id="project_description" rows="5" class="form-control" required></textarea>
         </div>
         <div class="form-group">
+            <label for="project_features" class="form-label">Project Features (one per line):</label>
+            <textarea name="project_features" id="project_features" rows="5" class="form-control" placeholder="Enter each feature on a new line"></textarea>
+        </div>
+        <div class="form-group">
             <label for="project_link" class="form-label">Project Link:</label>
             <input type="url" name="project_link" id="project_link" class="form-control" required>
         </div>
@@ -282,7 +254,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['project_submit'])) {
         </div>
         <div class="form-group">
             <label for="project_technologies" class="form-label">Project Technologies (separate each with a comma):</label>
-            <textarea type="text" name="project_technologies[]" id="project_technologies" class="form-control" required></textarea>
+            <textarea name="project_technologies" id="project_technologies" class="form-control" required></textarea>
         </div>
         <button type="submit" name="project_submit" class="btn btn-dark">Add Project</button>
     </form>

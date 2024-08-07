@@ -15,8 +15,8 @@ if ($result && $result->num_rows > 0) {
     $project = $result->fetch_assoc();
 }
 
-// Fetch projects for the "More of My Work" section
-$projects_result = $db->query("SELECT * FROM projects ORDER BY id DESC LIMIT 3");
+// Fetch two random projects excluding the current project
+$projects_result = $db->query("SELECT * FROM projects WHERE id != $project_id ORDER BY RAND() LIMIT 2");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +72,7 @@ $projects_result = $db->query("SELECT * FROM projects ORDER BY id DESC LIMIT 3")
             border: 1px solid white;
             font-size: 0.875rem;
             text-align: center;
-            transition: transform 0.3s ease; /* Added hover effect */
+            transition: transform 0.3s ease;
             cursor: pointer;
         }
         .badge:hover {
@@ -90,15 +90,28 @@ $projects_result = $db->query("SELECT * FROM projects ORDER BY id DESC LIMIT 3")
             transform: translateY(-5px);
         }
         .card {
-            border-color: rgba(255, 255, 255, 0.5); /* Set the border color with opacity */
+            border-color: rgba(255, 255, 255, 0.5);
         }
         .btn-home {
             position: absolute;
             top: 20px;
             left: 20px;
-            z-index: 9999; /* Ensure it's on top */
-            background-color: rgba(255, 255, 255, 0.8); /* Optional: Add slight background to improve visibility */
+            z-index: 9999;
+            background-color: rgba(255, 255, 255, 0.8);
             border: none;
+        }
+        .list-group-item {
+            
+            background-color: transparent;
+        }
+        .link{
+            transition: 0.5s ease;
+        }
+        .link:hover{
+            border: 1px solid var(--main-color) !important;
+  background-color: transparent !important;
+  color: var(--main-color) !important;
+  transition: 0.2s ease;
         }
     </style>
 </head>
@@ -113,20 +126,39 @@ $projects_result = $db->query("SELECT * FROM projects ORDER BY id DESC LIMIT 3")
         <h1 class="display-4 bold-text mb-3 fs-5 text-main">Saleem Talha</h1>
         <p class="lead main-text">Your Vision, My Expertise, Together We Create</p>
     </div>
-    <a href="index.php" class="btn btn-main btn-home"><i class="bx bx-home"></i></a> <!-- Button added here -->
+    <a href="index.php" class="btn btn-main btn-home"><i class="bx bx-home"></i></a>
 </div>
 
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8">
             <h2 class="text-main bold-text"><?php echo htmlspecialchars($project['project_name']); ?></h2>
-            <p class="main-text white-opacity-50"><?php echo nl2br(htmlspecialchars($project['project_description'])); ?></p>
+            <p class="main-text white-opacity-50" style="font-size: 1.2rem;"><?php echo nl2br(htmlspecialchars($project['project_description'])); ?></p>
+            <?php if (!empty($project['project_features'])): ?>
+                <h3 class="text-main bold-text mt-4">Project Features</h3>
+                <ul class="list-group" style="font-size: 1.2rem;">
+                    <?php
+                    $features = explode("\n", $project['project_features']);
+                    foreach ($features as $feature):
+                        $feature = trim($feature);
+                        if (!empty($feature)):
+                    ?>
+                        <li class="list-group-item white-opacity-50" style="font-size: 1.2rem;">
+                            <i class="bx bx-check me-2 text-main" style="color:white"></i>
+                            <?php echo htmlspecialchars($feature); ?>
+                        </li>
+                    <?php
+                        endif;
+                    endforeach;
+                    ?>
+                </ul>
+            <?php endif; ?>
         </div>
         <div class="col-md-4">
             <h3 class="text-main bold-text">Technologies Used</h3>
             <div class="tech-badges-container">
                 <?php
-                $technologies = explode("\n", $project['project_technologies']); // Split technologies by newline
+                $technologies = explode("\n", $project['project_technologies']);
                 foreach ($technologies as $tech):
                     $tech = trim($tech);
                     if (!empty($tech)):
@@ -137,49 +169,47 @@ $projects_result = $db->query("SELECT * FROM projects ORDER BY id DESC LIMIT 3")
                 endforeach;
                 ?>
             </div>
+            <h3 class="mt-5 text-main bold-text">Project Link</h3>
             <?php if (!empty($project['project_link'])): ?>
                 <div class="mt-3">
-                    <a href="<?php echo htmlspecialchars($project['project_link']); ?>" class="btn btn-primary" target="_blank">View Project</a>
+                    <a href="<?php echo htmlspecialchars($project['project_link']); ?>" class="white-opacity-50 link" style="text-decoration:none" target="_blank">
+                        <div class="container d-flex">
+                            <h6 class="me-2"><?php echo htmlspecialchars($project['project_name']); ?></h6>
+                            <i class="bx bxl-github fs-2" ></i>
+                        </div>
+                    </a>
                 </div>
             <?php endif; ?>
-        </div>
-    </div>
-</div>
+            <section id="more-work">
 
-<section id="more-work" class="py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <figure data-aos="fade-up">
-                    <blockquote class="blockquote">
-                        <h2 class="text-main bold-text">More of My Work</h2>
-                    </blockquote>
-                    <figcaption class="blockquote-footer mb-0 fs-1 text-uppercase">
+            
+            <h3 class="mt-5 text-main bold-text mb-4">More of My Work</h3>
+            <figcaption class="blockquote-footer mb-0 fs-1 text-uppercase">
                         Recent Projects
-                    </figcaption>
-                </figure>
-            </div>
-        </div>
-        <div class="row py-5">
-            <?php if ($projects_result && $projects_result->num_rows > 0): ?>
+                </figcaption>
+                <div class="container">
+                <?php if ($projects_result && $projects_result->num_rows > 0): ?>
                 <?php while ($project = $projects_result->fetch_assoc()): ?>
-                    <div class="col-md-4 mb-4">
+                    <div class="m-4">
                         <div class="card border p-3 rounded-4 main-text project-card" data-aos="fade-up" onclick="window.location.href='project-details.php?id=<?php echo $project['id']; ?>'">
-                            <div class="row g-0">
-                                <div class="col-md-12">
-                                    <img src="<?php echo htmlspecialchars($project['project_img']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($project['project_name']); ?>">
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="card-body">
-                                        <h5 class="card-title" style="color:rgb(104, 222, 110);"><?php echo htmlspecialchars($project['project_name']); ?></h5>
-                                        <p class="card-text white-opacity-50"><?php echo nl2br(htmlspecialchars($project['project_description'])); ?></p>
-                                        <div class="mt-3 d-flex flex-wrap align-items-center">
-                                            <?php 
-                                            $technologies = explode(", ", $project['project_technologies']);
-                                            foreach ($technologies as $tech): ?>
-                                                <span class="badge"><?php echo htmlspecialchars($tech); ?></span>
-                                            <?php endforeach; ?>
-                                        </div>
+                            <div class="col-md-12">
+                                <img src="<?php echo htmlspecialchars($project['project_img']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($project['project_name']); ?>">
+                            </div>
+                            <div class="col-md-12">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color:rgb(104, 222, 110);"><?php echo htmlspecialchars($project['project_name']); ?></h5>
+                                    <p class="card-text white-opacity-50">
+                                        <?php
+                                        $description = htmlspecialchars($project['project_description']);
+                                        echo substr($description, 0, 100) . (strlen($description) > 100 ? '...' : '');
+                                        ?>
+                                    </p>
+                                    <div class="mt-3 d-flex flex-wrap align-items-center">
+                                        <?php 
+                                        $technologies = explode(", ", $project['project_technologies']);
+                                        foreach ($technologies as $tech): ?>
+                                            <span class="badge"><?php echo htmlspecialchars($tech); ?></span>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                             </div>
@@ -189,9 +219,12 @@ $projects_result = $db->query("SELECT * FROM projects ORDER BY id DESC LIMIT 3")
             <?php else: ?>
                 <p>No additional projects found.</p>
             <?php endif; ?>
+                    </div>
+                    </section>
         </div>
     </div>
-</section>
+</div>
+
 
 <?php include_once('particles.php'); ?>
 
