@@ -259,7 +259,7 @@ function getYouTubeVideoId($url) {
                                         echo substr($description, 0, 100) . (strlen($description) > 100 ? '...' : '');
                                         ?>
                                     </p>
-                                    <div class="mt-3 d-flex flex-wrap align-items-center">
+                                    <div class="mt-3 d-flex flex-wrap align-items-center" style="max-height: 100px; overflow-y: auto;">
                                         <?php 
                                         $technologies = explode(", ", $project['project_technologies']);
                                         foreach ($technologies as $tech): ?>
