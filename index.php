@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </h3>
                         <div class="card mb-3">
                             <div class="card-body ps-0 py-5">
-                                <p class="text-start main-text bold-text fs-1 white-opacity-50 mb-0">
+                                <p class="text-start main-text  fs-1 white-opacity-50 mb-0">
                                    <?php echo $description; ?>
                                 </p>
                                 <a href="https://drive.google.com/file/d/1j0zs4pDJBRp0-2Omqm4_w4HpL5DEuwGC/view?usp=sharing"
@@ -165,7 +165,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </script>
     </section>
 
+    
     <?php include_once('about.php'); ?>
+    <?php include_once('achievements.php'); ?>
+    
     <?php include_once('skills.php'); ?>
     <?php include_once('services.php'); ?>
     <?php include_once('projects.php'); ?>
@@ -194,6 +197,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (event.altKey && event.shiftKey && event.key === 'A') {
                 // Redirect to admin.php
                 window.location.href = 'admin.php';
+            }
+            if (event.altKey && event.shiftKey && event.key === 'U') {
+                // Redirect to admin.php
+                window.location.href = 'update_project.php';
             }
         });
     </script>

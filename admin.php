@@ -132,12 +132,67 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         
         $stmt->close();
+     } elseif (isset($_POST['achievement_submit'])) {
+            $description = $_POST['description'];
+            $type = $_POST['type'];
+    
+            // Handle file upload
+            $target_dir = "certificates/";
+            if (!file_exists($target_dir)) {
+                mkdir($target_dir, 0777, true);
+            }
+    
+            $certificate = $_FILES['certificate'];
+            $target_file = $target_dir . basename($certificate["name"]);
+            $uploadOk = 1;
+            $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    
+            // Check file size
+            if ($certificate["size"] > 5000000) { // 5MB limit
+                echo "<div class='alert alert-danger' role='alert'>Sorry, your file is too large.</div>";
+                $uploadOk = 0;
+            }
+    
+            // Allow only PDF format
+            if($fileType != "pdf") {
+                echo "<div class='alert alert-danger' role='alert'>Sorry, only PDF files are allowed.</div>";
+                $uploadOk = 0;
+            }
+    
+            // If everything is ok, try to upload file and save data
+            if ($uploadOk == 1) {
+                if (move_uploaded_file($certificate["tmp_name"], $target_file)) {
+                    // File uploaded successfully, now save to database
+                    $stmt = $db->prepare("INSERT INTO achievements (certificate, description, type) VALUES (?, ?, ?)");
+                    
+                    if ($stmt) {
+                        $stmt->bind_param("sss", $target_file, $description, $type);
+                        if ($stmt->execute()) {
+                            echo "<div class='alert alert-success' role='alert'>Achievement added successfully!</div>";
+                        } else {
+                            echo "<div class='alert alert-danger' role='alert'>Error adding achievement: " . $stmt->error . "</div>";
+                        }
+                        $stmt->close();
+                    } else {
+                        echo "<div class='alert alert-danger' role='alert'>Error preparing statement: " . $db->error . "</div>";
+                    }
+                } else {
+                    echo "<div class='alert alert-danger' role='alert'>Sorry, there was an error uploading your file.</div>";
+                }
+            }
+        }
     }
-}
+
 
 // Fetch services from the database
 $services_result = $db->query("SELECT * FROM services ORDER BY id DESC");
+
+// Add this to the existing if-elseif chain in the form submission handling section
+
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -258,6 +313,25 @@ $services_result = $db->query("SELECT * FROM services ORDER BY id DESC");
             <button type="submit" name="project_submit" class="btn btn-dark">Add Project</button>
         </form>
     </section>
+
+    <section id="achievements" class="mt-5">
+    <h2>Achievements Section</h2>
+    <form method="post" action="" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="description" class="form-label">Achievement Description:</label>
+            <textarea name="description" id="description" rows="3" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="type" class="form-label">Achievement Type:</label>
+            <input type="text" name="type" id="type" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="certificate" class="form-label">Certificate (PDF only):</label>
+            <input type="file" name="certificate" id="certificate" class="form-control-file" accept=".pdf" required>
+        </div>
+        <button type="submit" name="achievement_submit" class="btn btn-dark">Add Achievement</button>
+    </form>
+</section>
 </div>
 
 <script>

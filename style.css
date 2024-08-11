@@ -12,8 +12,9 @@ body {
 }
 
 :root {
-  --main-color: rgb(96, 201, 101);
-  --main-color-50: rgba(104, 222, 110, 0.6);
+  --new-color: rgb(30, 196, 160);
+  --new-color: rgb(30, 196, 160);
+  --new-color-50:  rgb(30, 196, 160);
   --bold-title: "Lato", cursive;
   --main-title: "Pirata One", cursive;
   --main-text: "Poppins", sans-serif;
@@ -26,7 +27,7 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: var(--main-color);
+  background: var(--new-color);
 }
 
 /* Handle */
@@ -102,19 +103,22 @@ canvas {
 }
 
 .text-main {
-  color: var(--main-color) !important;
+  color: var(--new-color) !important;
+}
+.new-text-main {
+  color: rgb(25, 186, 206) !important;
 }
 
 .text-main2 {
-  color: var(--main-color) !important;
+  color: var(--new-color) !important;
 }
 
 .text-main-50 {
-  color: var(--main-color-50) !important;
+  color: var(--new-color-50) !important;
 }
 
 .btn-main {
-  background-color: var(--main-color) !important;
+  background-color: var(--new-color) !important;
   color: black;
 
 
@@ -122,23 +126,23 @@ canvas {
 }
 
 .btn-main:hover {
-  border: 1px solid var(--main-color) !important;
+  border: 1px solid var(--new-color) !important;
   background-color: transparent !important;
-  color: var(--main-color) !important;
+  color: var(--new-color) !important;
   transition: 0.2s ease;
 }
 
 .btn-outline-main {
   background-color: transparent;
-  color: var(--main-color) !important;
+  color: var(--new-color) !important;
   
  
-  border: 1px solid var(--main-color) !important;
+  border: 1px solid var(--new-color) !important;
   transition: 0.2s ease;
 }
 
 .btn-outline-main:hover {
-  background-color: var(--main-color) !important;
+  background-color: var(--new-color) !important;
   color: black !important;
   
   
@@ -155,7 +159,7 @@ canvas {
 }
 
 .main-text {
-  font-family: var(--main-text) !important;
+  font-family: rgb(25, 186, 206) !important;
 }
 
 .fs-5 {
@@ -224,17 +228,17 @@ canvas {
 }
 
 .light-border {
-  border: 1px solid var(--main-color-50) !important;
+  border: 1px solid var(--new-color-50) !important;
 }
 
 .card {
-  border: var(--main-color);
+  border: var(--new-color);
   background-color: transparent;
   backdrop-filter: blur(5px) !important;
 }
 
 .exp {
-  border-color: var(--main-color) !important;
+  border-color: var(--new-color) !important;
 }
 
 .social-links {
@@ -255,7 +259,7 @@ canvas {
 }
 
 .social-links li a {
-  color: rgb(104, 222, 110);
+  color: rgb(30, 196, 160);
   font-size: 1.5rem;
   transition: all 0.3s ease-in-out;
   display: inline-block;
@@ -309,7 +313,7 @@ canvas {
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 3px solid rgb(104, 222, 110); /* Border color */
+  border: 3px solid var(--new-color); /* Border color */
   bottom: -20px;
   right: -20px;
   z-index: -1;
@@ -427,14 +431,14 @@ canvas {
 
   .border-main .badge:hover {
     background-color: transparent !important;
-    border: 1px solid var(--main-color-50) !important;
-    color: var(--main-color-50) !important;
+    border: 1px solid var(--new-color-50) !important;
+    color: var(--new-color-50) !important;
     cursor: pointer;
     transition: 0.4s;
   }
 
   .badge-main-class {
-    background-color: var(--main-color-50) !important;
+    background-color: var(--new-color-50) !important;
     color: black !important;
     font-size: 1em !important;
     font-family: var(--main-text) !important;
@@ -466,13 +470,13 @@ canvas {
 }
 
 .tabs .active {
-  color: var(--main-color) !important;
+  color: var(--new-color) !important;
   background-color: rgba(255, 255, 255, 0.1) !important;
   border: none;
 }
 
 .tabs .nav-link:hover {
-  color: var(--main-color) !important;
+  color: var(--new-color) !important;
   background-color: rgba(255, 255, 255, 0.1) !important;
   border: none;
 }
@@ -487,7 +491,7 @@ canvas {
 }
 
 .border-main:hover {
-  border: 1px solid var(--main-color-50) !important;
+  border: 1px solid var(--new-color-50) !important;
   transition: 0.2s;
 }
 
@@ -498,14 +502,14 @@ canvas {
 
 .border-main .badge:hover {
   background-color: transparent !important;
-  border: 1px solid var(--main-color-50) !important;
-  color: var(--main-color-50) !important;
+  border: 1px solid var(--new-color-50) !important;
+  color: var(--new-color-50) !important;
   cursor: pointer;
   transition: 0.4s;
 }
 
 .badge-main-class {
-  background-color: var(--main-color-50) !important;
+  background-color: var(--new-color-50) !important;
   color: black !important;
   font-size: 1em !important;
   font-family: var(--main-text) !important;
@@ -522,7 +526,7 @@ canvas {
 
 /* Add a line at the bottom of the link */
 .navbar-nav .nav-item .nav-link:hover {
-  color: var(--main-color);
+  color: var(--new-color);
 }
 
 /* Styling the line on hover */
@@ -533,7 +537,7 @@ canvas {
   left: 7px;
   width: 80%;
   height: 1px; /* Thickness of the line */
-  background-color: var(--main-color);
+  background-color: var(--new-color);
   transform: scaleX(0); /* Initially, the line is not visible */
   transform-origin: bottom left;
   transition: transform 0.3s;
@@ -553,7 +557,7 @@ canvas {
 }
 /* Add a line at the bottom of the link */
 .footer-links li:hover a {
-  color: var(--main-color) !important; /* Change link color on hover */
+  color: var(--new-color) !important; /* Change link color on hover */
 }
 
 /* Styling the line on hover */
@@ -564,14 +568,14 @@ canvas {
   left: 0;
   width: 100%;
   height: 2px; /* Thickness of the line */
-  background-color: var(--main-color);
+  background-color: var(--new-color);
   transform: scaleX(0); /* Initially, the line is not visible */
   transform-origin: bottom left;
   transition: transform 0.3s;
 }
 
 .footer-links li a:hover {
-  color: var(--main-color); /* Change link color on hover */
+  color: var(--new-color); /* Change link color on hover */
 }
 
 .footer-links li a:hover::after {
@@ -585,7 +589,7 @@ canvas {
 .designed {
   position: relative;
   text-decoration: none;
-  color: var(--main-color); /* Text color */
+  color: var(--new-color); /* Text color */
 }
 
 .designed::before,
@@ -594,7 +598,7 @@ canvas {
   position: absolute;
   width: 0;
   height: 2px; /* Adjust the thickness of the line as needed */
-  background-color: var(--main-color); /* Line color */
+  background-color: var(--new-color); /* Line color */
   bottom: -5px; /* Adjust the distance from text as needed */
   transition: width 0.3s;
 }

@@ -238,44 +238,46 @@ function getYouTubeVideoId($url) {
                 </div>
             <?php endif; ?>
             <section id="more-work">
-            <h3 class="mt-5 text-main bold-text mb-4">More of My Work</h3>
-            <figcaption class="blockquote-footer mb-0 fs-1 text-uppercase">
-                        Recent Projects
-                </figcaption>
-                <div class="container">
-                <?php if ($projects_result && $projects_result->num_rows > 0): ?>
-                <?php while ($project = $projects_result->fetch_assoc()): ?>
-                    <div class="m-4">
-                        <div class="card border p-3 rounded-4 main-text project-card" data-aos="fade-up" onclick="window.location.href='project-details.php?id=<?php echo $project['id']; ?>'">
-                            <div class="col-md-12">
-                                <img src="<?php echo htmlspecialchars($project['project_img']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($project['project_name']); ?>">
+    <h3 class="mt-5 text-main bold-text mb-4">More of My Work</h3>
+    <figcaption class="blockquote-footer mb-0 fs-1 text-uppercase">
+        Recent Projects
+    </figcaption>
+    <div class="container">
+        <?php if ($projects_result && $projects_result->num_rows > 0): ?>
+            <?php while ($project = $projects_result->fetch_assoc()): ?>
+                <div class="m-4">
+                    <div class="card project-card border border-main rounded-4 main-text" data-aos="fade-up" onclick="window.location.href='project-details.php?id=<?php echo $project['id']; ?>'">
+                        <img src="<?php echo htmlspecialchars($project['project_img']); ?>" class="card-img-top rounded-top-4" alt="<?php echo htmlspecialchars($project['project_name']); ?>">
+                        <div class="card-body">
+                            <div class="tech-badges-container">
+                                <?php 
+                                $technologies = explode("\n", $project['project_technologies']);
+                                foreach ($technologies as $tech): 
+                                    $tech = trim($tech);
+                                    if (!empty($tech)):
+                                ?>
+                                    <span class="badge"><?php echo htmlspecialchars($tech); ?></span>
+                                <?php
+                                    endif;
+                                endforeach; 
+                                ?>
                             </div>
-                            <div class="col-md-12">
-                                <div class="card-body">
-                                    <h5 class="card-title" style="color:rgb(104, 222, 110);"><?php echo htmlspecialchars($project['project_name']); ?></h5>
-                                    <p class="card-text white-opacity-50">
-                                        <?php
-                                        $description = htmlspecialchars($project['project_description']);
-                                        echo substr($description, 0, 100) . (strlen($description) > 100 ? '...' : '');
-                                        ?>
-                                    </p>
-                                    <div class="mt-3 d-flex flex-wrap align-items-center" style="max-height: 100px; overflow-y: auto;">
-                                        <?php 
-                                        $technologies = explode(", ", $project['project_technologies']);
-                                        foreach ($technologies as $tech): ?>
-                                            <span class="badge"><?php echo htmlspecialchars($tech); ?></span>
-                                        <?php endforeach; ?>
-                                    </div>
-                                </div>
-                            </div>
+                            <h5 class="card-title bold-text text-main mt-2"><?php echo htmlspecialchars($project['project_name']); ?></h5>
+                            <p class="card-text white-opacity-50">
+                                <?php
+                                $description = htmlspecialchars($project['project_description']);
+                                echo substr($description, 0, 100) . (strlen($description) > 100 ? '...' : '');
+                                ?>
+                            </p>
                         </div>
                     </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <p>No additional projects found.</p>
-            <?php endif; ?>
                 </div>
-            </section>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p>No additional projects found.</p>
+        <?php endif; ?>
+    </div>
+</section>
         </div>
     </div>
 </div>
@@ -374,3 +376,16 @@ function getYouTubeVideoId($url) {
 
 </body>
 </html>
+
+<script>
+        document.addEventListener('keydown', function(event) {
+            if (event.altKey && event.shiftKey && event.key === 'A') {
+                // Redirect to admin.php
+                window.location.href = 'admin.php';
+            }
+            if (event.altKey && event.shiftKey && event.key === 'U') {
+                // Redirect to admin.php
+                window.location.href = 'update_project.php';
+            }
+        });
+    </script>

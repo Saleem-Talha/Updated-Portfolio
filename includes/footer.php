@@ -41,7 +41,7 @@
 
                         .footer-social-links li a {
                             font-size: 1.5rem;
-                            color: #60c965;
+                            color:  rgb(30, 196, 160);
                             transition: all 0.3s ease;
                         }
 
@@ -54,6 +54,8 @@
                     <ul class="footer-links mt-5" data-aos="fade-up">
                         <li><a class="nav-hedings" href="#home">Home</a></li>
                         <li><a class="nav-hedings" href="#about">About</a></li>
+                        <li><a class="nav-hedings" href="#achievements">Achievements</a></li>
+                        
                         <li><a class="nav-hedings" href="#skills">Skills</a></li>
                         <li><a class="nav-hedings" href="#services">Services</a></li>
                         <li><a class="nav-hedings" href="#projects">Projects</a></li>

@@ -36,16 +36,25 @@ if ($result && $result->num_rows > 0) {
 
                         <!-- Keep the existing static content -->
                         <ul class="main-text fs-1 mt-2 white-opacity-50">
-                            <li>
-                                Experience : <span style=" color: rgb(104, 222, 110);">3 years +</span>
-                            </li>
-                            <li>
-                                Projects : <span style="color:  rgb(104, 222, 110);">45 +</span>
-                            </li>
+                            
+                            <button class="btn btn-outline-main mt-3 main-text me-3">
+                                        Experience: 3+ years
+                                    </button></a>
+                            <button class="btn btn-outline-main mt-3 main-text me-3">
+                                        Projects: 45+
+                                    </button></a>
+                            
+                            
                         </ul>
 
                     
                     </div>
+                    <blockquote class="blockquote">
+                        <h4 class="text-main bold-text ">Internship</h2>
+                          </blockquote>
+                          <p class="text-start main-text  mb-0 white-opacity-50">
+                        Recently, I completed a rewarding remote internship at CodexCue Solutions, where I worked on five projects that showcased my versatility and skill. I successfully completed three basic-level projects, an intermediate project, and an advanced project, all of which contributed to my growth as a developer. My exceptional work during these projects earned me both an internship completion certificate and a recommendation certificate, reflecting the high standards I maintained throughout my time at CodexCue. This experience not only strengthened my technical skills but also honed my ability to deliver high-quality work under real-world conditions, further solidifying my commitment to excellence in every aspect of my career.<p>
+                  
                 </div>
             </div>
             <div class="col-md-4 order-1 order-md-2" data-aos="fade-up">

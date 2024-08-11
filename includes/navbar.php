@@ -14,6 +14,9 @@
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="300">
                         <a class="nav-link" href="#about">About</a>
                     </li>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="300">
+                        <a class="nav-link" href="#achievements">Achievements</a>
+                    </li>
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="400">
                         <a class="nav-link" href="#skills">Skills</a>
                     </li>
