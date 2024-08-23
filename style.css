@@ -104,6 +104,7 @@ canvas {
 
 .text-main {
   color: var(--new-color) !important;
+  font-family: var(--main-text) !important;
 }
 .new-text-main {
   color: rgb(25, 186, 206) !important;
